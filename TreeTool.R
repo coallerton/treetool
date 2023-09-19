@@ -80,4 +80,4 @@ treemap <- leaflet(data = trees_final, options = leafletOptions(zoomControl = FA
                             strong("Last Check In:"), trees_final$`Update Details`)
   )
 
-saveWidget(treemap, file="docs/treemap.html")
+saveWidget(treemap, file="treemap.html")
