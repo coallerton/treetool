@@ -77,7 +77,7 @@ server <- function(input, output, session) {
   
   output$treemap <- renderLeaflet({
     leaflet(data = trees_final, options = leafletOptions(zoomControl = FALSE)) %>%
-      addProviderTiles(providers$Stamen.TonerLite) %>%
+      addProviderTiles(providers$Stadia.StamenTonerLite) %>%
       setView(lng = -74.0, lat = 40.72, zoom = 15) %>%
       addControl(maptitle,  position = "topleft", className = "map-title") %>%
       addControl(maplegend,  position = "bottomright", className = "map-legend") %>%
