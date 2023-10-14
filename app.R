@@ -31,9 +31,11 @@ server <- function(input, output, session) {
   
   gs4_deauth()
   
-  tree_signup <- read_sheet("https://docs.google.com/spreadsheets/d/1U6HZCJe7c9WxjjaCj5A_iP1AIq209N8DJWwZc8RCHBg/edit?usp=sharing", sheet = "Sign Up")
-  tree_update <- read_sheet("https://docs.google.com/spreadsheets/d/1U6HZCJe7c9WxjjaCj5A_iP1AIq209N8DJWwZc8RCHBg/edit?usp=sharing", sheet = "Status Update")
-  tree_update_newest <- tree_update %>%
+  tree_signup_raw <- read_sheet("https://docs.google.com/spreadsheets/d/1U6HZCJe7c9WxjjaCj5A_iP1AIq209N8DJWwZc8RCHBg/edit?usp=sharing", sheet = "Sign Up")
+  tree_update_raw <- read_sheet("https://docs.google.com/spreadsheets/d/1U6HZCJe7c9WxjjaCj5A_iP1AIq209N8DJWwZc8RCHBg/edit?usp=sharing", sheet = "Status Update")
+  tree_signup <- tree_signup_raw %>%
+    mutate(`Tree ID (must match exactly - get the number from the map linked above)` = as.numeric(`Tree ID (must match exactly - get the number from the map linked above)`))
+  tree_update_newest <- tree_update_raw %>%
     group_by(`Tree ID (must match exactly - get the number from the map linked above)`) %>%
     slice(which.max(as.Date(`Date of Update`)))
   
