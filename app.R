@@ -79,7 +79,8 @@ server <- function(input, output, session) {
   
   output$treemap <- renderLeaflet({
     leaflet(data = trees_final, options = leafletOptions(zoomControl = FALSE)) %>%
-      addProviderTiles(providers$Esri.WorldGrayCanvas) %>%
+      htmlwidgets::onRender("function(el, x) {L.control.zoom({ position: 'topright' }).addTo(this)}") %>%
+      addProviderTiles(providers$CartoDB.Positron) %>%
       setView(lng = -74.0, lat = 40.72, zoom = 15) %>%
       addControl(maptitle,  position = "topleft", className = "map-title") %>%
       addControl(maplegend,  position = "bottomright", className = "map-legend") %>%
@@ -98,3 +99,4 @@ server <- function(input, output, session) {
 }
 
 shinyApp(ui = ui, server = server)
+
